@@ -9,9 +9,20 @@ describe "Market" do
     
     it "Keeps track of ID" do
       id = 88
-      market = FarMar::Market.new(id, "People's Co-op Farmers Market", "30th and Burnside", "Portland", "Multnomah", "Oregon", "97202")
+      market = FarMar::Market.new(
+        id, "People's Co-op Farmers Market", 
+        "30th and Burnside", "Portland", "Multnomah", "Oregon", "97202"
+      )
       market.must_respond_to :id
       market.id.must_equal id
+    end
+    
+    it "Requires an integer ID" do
+      proc { FarMar::Market.new("not an integer", "test", "test", "test", "test", "test", "test") }.must_raise ArgumentError
+    end
+    
+    it "Requires a positive ID" do
+      proc { FarMar::Market.new(-10, "test", "test", "test", "test", "test", "test") }.must_raise ArgumentError  
     end
     
     it "Keeps track of address" do
