@@ -60,4 +60,10 @@ describe "Market" do
       market.zip.must_equal zip
     end
   end
+  
+  describe "all" do
+  end
+  
+  describe "find" do
+  end
 end
