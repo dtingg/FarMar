@@ -92,5 +92,21 @@ describe "Market" do
   end
   
   describe "find" do
+    it "Returns nil if the market does not exist" do
+      market = FarMar::Market.find(12345)
+      market.must_be_nil
+    end
+    
+    it "Finds the first market" do
+      market = FarMar::Market.find(1)
+      market.must_be_kind_of FarMar::Market
+      market.id.must_equal 1
+    end
+    
+    it "Finds the last market" do 
+      market = FarMar::Market.find(500)
+      market.must_be_kind_of FarMar::Market
+      market.id.must_equal 500
+    end  
   end
 end
