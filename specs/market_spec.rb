@@ -74,13 +74,10 @@ describe "Market" do
       
       market.vendors.must_be_kind_of Array
       market.vendors.length.must_equal 3
-      
     end
-    
   end
   
-  
-  describe "all" do
+  describe "self.all" do
     it "Returns an array" do
       markets = FarMar::Market.all
       markets.must_be_kind_of Array
@@ -110,7 +107,7 @@ describe "Market" do
     end
   end
   
-  describe "find" do
+  describe "self.find" do
     it "Returns nil if the market does not exist" do
       market = FarMar::Market.find(12345)
       market.must_be_nil

@@ -28,22 +28,29 @@ module FarMar
       @product_id = product_id
     end
     
-    def self.find_by_vendor(vendor_id)
-      all.select do |sale|
-        sale.vendor_id == vendor_id
-      end
-    end
-    
     def self.all
       sales = CSV.readlines("support/sales.csv").map do |line|
         Sale.new(line[0].to_i, line[1].to_i, Time.parse(line[2]), line[3].to_i, line[4].to_i)
       end
+      
       return sales
     end
     
     def self.find(id)
       all.find do |sale|
         sale.id == id
+      end
+    end
+    
+    def self.find_by_vendor(vendor_id)
+      all.select do |sale|
+        sale.vendor_id == vendor_id
+      end
+    end
+    
+    def self.find_by_product(product_id)
+      all.select do |sale|
+        sale.product_id == product_id
       end
     end
   end

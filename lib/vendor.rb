@@ -1,3 +1,5 @@
+require "csv"
+
 module FarMar
   class Vendor
     attr_reader :id, :name, :employee_count, :market_id
@@ -40,14 +42,6 @@ module FarMar
       return total
     end
     
-    def self.by_market(market_id)
-      vendors = all.select do |vendor|
-        vendor.market_id == market_id
-      end
-      
-      return vendors
-    end
-    
     def self.all
       vendors = CSV.readlines("support/vendors.csv").map do |line|
         Vendor.new(line[0].to_i, line[1], line[2].to_i, line[3].to_i)
@@ -60,6 +54,14 @@ module FarMar
       all.find do |vendor|
         vendor.id == id
       end
+    end
+    
+    def self.by_market(market_id)
+      vendors = all.select do |vendor|
+        vendor.market_id == market_id
+      end
+      
+      return vendors
     end
   end
 end

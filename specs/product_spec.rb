@@ -66,7 +66,24 @@ describe "Product" do
     end
   end
   
-  describe "all" do
+  describe "#sales" do
+    it "Returns a collection of sale instances for this product" do
+      product = FarMar::Product.new(7, "Quaint Beef", 4)
+      
+      product.sales.must_be_kind_of Array
+      product.sales.length.must_equal 2
+    end
+  end
+  
+  describe "#number_of_sales" do
+    it "Returns the number of times a product has been sold" do
+      product = FarMar::Product.new(7, "Quaint Beef", 4)
+      
+      product.number_of_sales.must_equal 2
+    end
+  end
+  
+  describe "self.all" do
     it "Returns an array" do
       products = FarMar::Product.all
       products.must_be_kind_of Array
@@ -96,7 +113,7 @@ describe "Product" do
     end
   end
   
-  describe "find" do
+  describe "self.find" do
     it "Returns nil if the product does not exist" do
       product = FarMar::Product.find(12345)
       product.must_be_nil
@@ -125,7 +142,6 @@ describe "Product" do
     
     it "Returns an empty array if no products match" do
       vendor_id = 999999
-      
       products = FarMar::Product.find_by_vendor(vendor_id)
       products.must_be_kind_of Array
       products.must_be_empty
@@ -145,7 +161,6 @@ describe "Product" do
     
     it "Returns an array of many Products if many products match" do
       vendor_id = 4
-      
       products = FarMar::Product.find_by_vendor(vendor_id)
       products.must_be_kind_of Array
       products.length.must_equal 3

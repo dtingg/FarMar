@@ -74,7 +74,7 @@ describe "Sale" do
     end
   end
   
-  describe "all" do
+  describe "self.all" do
     it "Returns an array" do
       sales = FarMar::Sale.all
       sales.must_be_kind_of Array
@@ -104,7 +104,7 @@ describe "Sale" do
     end
   end
   
-  describe "find" do
+  describe "self.find" do
     it "Returns nil if the sale does not exist" do
       sale = FarMar::Sale.find(9999999)
       sale.must_be_nil

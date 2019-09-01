@@ -61,6 +61,15 @@ describe "Vendor" do
     end
   end
   
+  describe "#market" do
+    it "Returns the correct market for a vendor" do
+      vendor = FarMar::Vendor.find(17)
+      
+      vendor.market.must_be_kind_of FarMar::Market
+      vendor.market.name.must_equal "Quincy Farmers Market"
+    end
+  end
+  
   describe "#products" do
     it "Returns an empty array if no products match" do
       vendor = FarMar::Vendor.new(999999, "test vendor" , 10, 10)
@@ -68,7 +77,6 @@ describe "Vendor" do
       products = vendor.products
       products.must_be_kind_of Array
       products.must_be_empty
-      
     end
     
     it "Returns an array with one Product if one match" do
@@ -100,15 +108,6 @@ describe "Vendor" do
     end
   end
   
-  describe "#market" do
-    it "Returns the correct market for a vendor" do
-      vendor = FarMar::Vendor.find(17)
-      
-      vendor.market.must_be_kind_of FarMar::Market
-      vendor.market.name.must_equal "Quincy Farmers Market"
-    end
-  end
-  
   describe "#sales" do
     it "Returns the sales associated with a vendor" do
       vendor = FarMar::Vendor.find(17)
@@ -131,19 +130,7 @@ describe "Vendor" do
     end
   end
   
-  describe "by_market" do
-    it "Returns all vendors who are associated with a market" do
-      vendors = FarMar::Vendor.by_market(1)
-      
-      vendors.length.must_equal 6
-      
-      vendors.each do |vendor|
-        vendor.must_be_kind_of FarMar::Vendor
-      end
-    end
-  end
-  
-  describe "all" do
+  describe "self.all" do
     it "Returns an array" do
       vendors = FarMar::Vendor.all
       vendors.must_be_kind_of Array
@@ -173,7 +160,7 @@ describe "Vendor" do
     end
   end
   
-  describe "find" do
+  describe "self.find" do
     it "Returns nil if the vendor does not exist" do
       vendor = FarMar::Vendor.find(12345)
       vendor.must_be_nil
@@ -190,5 +177,17 @@ describe "Vendor" do
       vendor.must_be_kind_of FarMar::Vendor
       vendor.id.must_equal 2690
     end  
+  end
+  
+  describe "self.by_market" do
+    it "Returns all vendors who are associated with a market" do
+      vendors = FarMar::Vendor.by_market(1)
+      
+      vendors.length.must_equal 6
+      
+      vendors.each do |vendor|
+        vendor.must_be_kind_of FarMar::Vendor
+      end
+    end
   end
 end
