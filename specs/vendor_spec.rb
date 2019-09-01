@@ -109,6 +109,19 @@ describe "Vendor" do
     end
   end
   
+  describe "#sales" do
+    it "Returns the sales associated with a vendor" do
+      vendor = FarMar::Vendor.find(17)
+      
+      vendor.sales.must_be_kind_of Array
+      vendor.sales.length.must_equal 6
+      
+      vendor.sales.each do |sale|
+        sale.must_be_kind_of FarMar::Sale
+      end
+    end
+  end
+  
   describe "all" do
     it "Returns an array" do
       vendors = FarMar::Vendor.all

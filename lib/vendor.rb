@@ -29,7 +29,7 @@ module FarMar
     end
     
     def sales
-      # returns a collection of farmar sale instnaces associated by the vendor_id field
+      return Sale.find_by_vendor(id)
     end
     
     def revenue
