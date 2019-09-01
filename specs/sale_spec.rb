@@ -74,11 +74,19 @@ describe "Sale" do
     end
   end
   
-  describe "vendor" do
+  describe "#vendor" do
     it "Finds the Vendor instance that is associated with this sale" do
       sale = FarMar::Sale.new(15,8924,Time.parse("2013-11-10 11:31:16 -0800"),3,4)
       sale.vendor.must_be_kind_of FarMar::Vendor
       sale.vendor.id.must_equal 3
+    end
+  end
+  
+  describe "#product" do
+    it "Returns the Product instnace that is associated with this sale" do
+      sale = FarMar::Sale.new(15,8924,Time.parse("2013-11-10 11:31:16 -0800"),3,4)
+      sale.product.must_be_kind_of FarMar::Product
+      sale.product.id.must_equal 4
     end
   end
   
