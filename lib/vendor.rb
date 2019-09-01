@@ -20,6 +20,10 @@ module FarMar
       @market_id = market_id
     end
     
+    def products
+      Product.find_by_vendor(@id)
+    end
+    
     def self.all
       vendors = CSV.readlines("support/vendors.csv").map do |line|
         Vendor.new(line[0].to_i, line[1], line[2].to_i, line[3].to_i)
