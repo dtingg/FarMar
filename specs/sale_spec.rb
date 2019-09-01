@@ -74,6 +74,14 @@ describe "Sale" do
     end
   end
   
+  describe "vendor" do
+    it "Finds the Vendor instance that is associated with this sale" do
+      sale = FarMar::Sale.new(15,8924,Time.parse("2013-11-10 11:31:16 -0800"),3,4)
+      sale.vendor.must_be_kind_of FarMar::Vendor
+      sale.vendor.id.must_equal 3
+    end
+  end
+  
   describe "self.all" do
     it "Returns an array" do
       sales = FarMar::Sale.all
