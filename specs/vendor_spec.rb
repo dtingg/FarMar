@@ -122,6 +122,15 @@ describe "Vendor" do
     end
   end
   
+  describe "#revenue" do
+    it "Returns the sum of all the vendor's sales in cents" do
+      vendor = FarMar::Vendor.find(17)
+      
+      vendor.revenue.must_be_kind_of Integer
+      vendor.revenue.must_equal 24883
+    end
+  end
+  
   describe "all" do
     it "Returns an array" do
       vendors = FarMar::Vendor.all

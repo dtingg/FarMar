@@ -33,8 +33,11 @@ module FarMar
     end
     
     def revenue
+      total = sales.sum do |sale|
+        sale.amount
+      end
       
-      # returns the sum of all of the vendor's sales in cents
+      return total
     end
     
     def self.by_market(market_id)
