@@ -131,6 +131,18 @@ describe "Vendor" do
     end
   end
   
+  describe "by_market" do
+    it "Returns all vendors who are associated with a market" do
+      vendors = FarMar::Vendor.by_market(1)
+      
+      vendors.length.must_equal 6
+      
+      vendors.each do |vendor|
+        vendor.must_be_kind_of FarMar::Vendor
+      end
+    end
+  end
+  
   describe "all" do
     it "Returns an array" do
       vendors = FarMar::Vendor.all
