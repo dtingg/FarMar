@@ -18,6 +18,10 @@ module FarMar
       @zip = zip
     end
     
+    def vendors
+      return Vendor.by_market(id)
+    end
+    
     def self.all
       markets = CSV.readlines("support/markets.csv").map do |line|
         Market.new(line[0].to_i, line[1], line[2], line[3], line[4], line[5], line[6])

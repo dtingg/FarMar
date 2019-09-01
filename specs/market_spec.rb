@@ -68,6 +68,18 @@ describe "Market" do
     end
   end
   
+  describe "#vendors" do
+    it "Returns all vendors associated with a market" do
+      market = FarMar::Market.find(2)
+      
+      market.vendors.must_be_kind_of Array
+      market.vendors.length.must_equal 3
+      
+    end
+    
+  end
+  
+  
   describe "all" do
     it "Returns an array" do
       markets = FarMar::Market.all

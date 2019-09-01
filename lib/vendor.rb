@@ -20,8 +20,32 @@ module FarMar
       @market_id = market_id
     end
     
+    def market
+      # returns the FarMar::Market instance that is associated with this vendor using the FarMar::Vrndor market_id field
+      
+    end
+    
+    
     def products
       Product.find_by_vendor(@id)
+    end
+    
+    
+    def sales
+      # returns a collection of farmar sale instnaces associated by the vendor_id field
+    end
+    
+    def revenue
+      
+      # returns the sum of all of the vendor's sales in cents
+    end
+    
+    def self.by_market(market_id)
+      vendors = all.select do |vendor|
+        vendor.market_id == market_id
+      end
+      
+      return vendors
     end
     
     def self.all
