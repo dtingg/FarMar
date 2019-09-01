@@ -100,6 +100,15 @@ describe "Vendor" do
     end
   end
   
+  describe "#market" do
+    it "Returns the correct market for a vendor" do
+      vendor = FarMar::Vendor.find(17)
+      
+      vendor.market.must_be_kind_of FarMar::Market
+      vendor.market.name.must_equal "Quincy Farmers Market"
+    end
+  end
+  
   describe "all" do
     it "Returns an array" do
       vendors = FarMar::Vendor.all

@@ -21,15 +21,12 @@ module FarMar
     end
     
     def market
-      # returns the FarMar::Market instance that is associated with this vendor using the FarMar::Vrndor market_id field
-      
+      return Market.find(market_id)
     end
-    
     
     def products
-      Product.find_by_vendor(@id)
+      return Product.find_by_vendor(id)
     end
-    
     
     def sales
       # returns a collection of farmar sale instnaces associated by the vendor_id field
