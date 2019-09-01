@@ -21,10 +21,11 @@ module FarMar
     end
     
     def self.all
-      vendors = []
-      CSV.readlines("support/vendors.csv").map do |line|
+      vendors = CSV.readlines("support/vendors.csv").map do |line|
         Vendor.new(line[0].to_i, line[1], line[2].to_i, line[3].to_i)
       end
+      
+      return vendors
     end
     
     def self.find(id)

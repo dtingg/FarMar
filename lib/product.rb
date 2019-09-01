@@ -17,10 +17,11 @@ module FarMar
     end
     
     def self.all
-      products = []
-      CSV.readlines("support/products.csv").map do |line|
+      products = CSV.readlines("support/products.csv").map do |line|
         Product.new(line[0].to_i, line[1], line[2].to_i)
       end
+      
+      return products
     end
     
     def self.find(id)

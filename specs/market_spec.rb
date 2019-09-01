@@ -25,6 +25,13 @@ describe "Market" do
       proc { FarMar::Market.new(-10, "test", "test", "test", "test", "test", "test") }.must_raise ArgumentError  
     end
     
+    it "Keeps track of name" do
+      name = "West Seattle Farmers Market"
+      market = FarMar::Market.new(1, name, "West Seattle Junction", "Seattle", "King", "Washington", "98136")
+      market.must_respond_to :name
+      market.name.must_equal name
+    end
+    
     it "Keeps track of address" do
       address = "test"
       market = FarMar::Market.new(1, "People's Co-op Farmers Market", address, "Portland", "Multnomah", "Oregon", "97202")

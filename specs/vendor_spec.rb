@@ -19,7 +19,7 @@ describe "Vendor" do
       proc { FarMar::Vendor.new("not an integer", "test", "test", "test") }.must_raise ArgumentError
     end
     
-    it "Requires a positive ID" do
+    it "Requires a positive integer ID" do
       proc { FarMar::Vendor.new(-10, "test", "test", "test") }.must_raise ArgumentError  
     end
     
@@ -37,12 +37,12 @@ describe "Vendor" do
       vendor.employee_count.must_equal employee_count
     end
     
-    it "Requires an integer employee count" do
-      proc { FarMar::Vendor.new(1, "West Seattle Carrots", "not an integer", 5) }.must_raise ArgumentError
+    it "Requires an integer for employee count" do
+      proc {FarMar::Vendor.new(1, "West Seattle Carrots", "ten", 5) }.must_raise ArgumentError
     end
     
-    it "Requires a positive employee count" do
-      proc { FarMar::Vendor.new(1, "West Seattle Carrots", -1, 5) }.must_raise ArgumentError
+    it "Requires a positive integer for employee count" do
+      proc {FarMar::Vendor.new(1, "West Seattle Carrots", -1, 5) }.must_raise ArgumentError
     end
     
     it "Keeps track of market id" do

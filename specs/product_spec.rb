@@ -15,9 +15,11 @@ describe "Product" do
     end
     
     it "Requires an integer ID" do
-      proc {
-        product = FarMar::Product.new("Not an integer", "Dry Beets", 1)
-      }.must_raise ArgumentError
+      proc { FarMar::Product.new("Not an integer", "Dry Beets", 1) }.must_raise ArgumentError
+    end
+    
+    it "Requires a positive integer ID" do
+      proc { FarMar::Product.new(-1, "Dry Beets", 1) }.must_raise ArgumentError
     end
     
     it "Keeps track of name" do
@@ -36,13 +38,13 @@ describe "Product" do
     
     it "Requires an integer vendor_id" do
       proc {
-        product = FarMar::Product.new(1, "Dry Beets", "Not an integer")
+        FarMar::Product.new(1, "Dry Beets", "Not an integer")
       }.must_raise ArgumentError
     end
     
-    it "Requires a positive vendor_id" do
+    it "Requires a positive integer vendor_id" do
       proc {
-        product = FarMar::Product.new(1, "Dry Beets", -11)
+        FarMar::Product.new(1, "Dry Beets", -11)
       }.must_raise ArgumentError
     end
     
