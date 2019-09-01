@@ -33,5 +33,11 @@ module FarMar
         product.id == id
       end
     end
+    
+    def self.find_by_vendor(vendor_id)
+      all.select do |product|
+        product.vendor_id == vendor_id
+      end
+    end
   end
 end
