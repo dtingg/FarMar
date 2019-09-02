@@ -27,7 +27,7 @@ module FarMar
     end
     
     def products
-      return Product.find_by_vendor(id)
+      return Product.by_vendor(id)
     end
     
     def sales

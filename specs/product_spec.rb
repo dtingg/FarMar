@@ -132,24 +132,24 @@ describe "Product" do
     end  
   end
   
-  describe "find_by_vendor" do
+  describe "self.by_vendor" do
     it "Does something if the vendor_id is invalid" do
       vendor_id = "not an id"
-      products = FarMar::Product.find_by_vendor(vendor_id)
+      products = FarMar::Product.by_vendor(vendor_id)
       products.must_be_kind_of Array
       products.must_be_empty
     end
     
     it "Returns an empty array if no products match" do
       vendor_id = 999999
-      products = FarMar::Product.find_by_vendor(vendor_id)
+      products = FarMar::Product.by_vendor(vendor_id)
       products.must_be_kind_of Array
       products.must_be_empty
     end
     
     it "Returns an array of one Product if one product matches" do
       vendor_id = 3
-      products = FarMar::Product.find_by_vendor(vendor_id)
+      products = FarMar::Product.by_vendor(vendor_id)
       products.must_be_kind_of Array
       products.length.must_equal 1
       
@@ -161,7 +161,7 @@ describe "Product" do
     
     it "Returns an array of many Products if many products match" do
       vendor_id = 4
-      products = FarMar::Product.find_by_vendor(vendor_id)
+      products = FarMar::Product.by_vendor(vendor_id)
       products.must_be_kind_of Array
       products.length.must_equal 3
       
@@ -169,6 +169,21 @@ describe "Product" do
         product.must_be_kind_of FarMar::Product
         product.vendor_id.must_equal vendor_id
       end
+    end
+  end
+  
+  describe "self.most_revenue(n)" do
+    it "Returns the top n Product instances ranked by total revenue" do
+      top_revenue_products = FarMar::Product.most_revenue(5)
+      
+      top_revenue_products.length.must_equal 5
+      top_revenue_products.must_be_kind_of Array
+      
+      top_revenue_products[0].id.must_equal 4
+      top_revenue_products[1].id.must_equal 14
+      top_revenue_products[2].id.must_equal 1
+      top_revenue_products[3].id.must_equal 8
+      top_revenue_products[4].id.must_equal 41      
     end
   end
 end

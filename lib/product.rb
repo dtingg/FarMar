@@ -42,10 +42,19 @@ module FarMar
       end
     end
     
-    def self.find_by_vendor(vendor_id)
+    def self.by_vendor(vendor_id)
       all.select do |product|
         product.vendor_id == vendor_id
       end
+    end
+    
+    def self.most_revenue(number)
+      most_revenue = all.max_by(number) do |product|
+        product.sales.sum do |sale|
+          sale.amount
+        end
+      end
+      return most_revenue
     end
   end
 end
