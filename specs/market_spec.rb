@@ -108,6 +108,24 @@ describe "Market" do
     end
   end
   
+  describe "#worst vendor" do
+    it "Returns the vendor with the lowest revenue overall" do
+      market = FarMar::Market.find(2)
+      worst_vendor = market.worst_vendor
+      
+      worst_vendor.must_be_kind_of FarMar::Vendor
+      worst_vendor.id.must_equal 9
+    end
+    
+    it "Returns the vendor with the lowest revenue for a specific date" do
+      market = FarMar::Market.find(2)
+      worst_vendor = market.worst_vendor("November 10, 2013")
+      
+      worst_vendor.must_be_kind_of FarMar::Vendor
+      worst_vendor.id.must_equal 8
+    end
+  end
+  
   describe "self.all" do
     it "Returns an array" do
       markets = FarMar::Market.all

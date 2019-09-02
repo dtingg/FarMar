@@ -53,6 +53,26 @@ module FarMar
       return preferred_vendor
     end
     
+    def worst_vendor(date=nil)
+      if date
+        start_date = Time.parse(date)
+        end_date = start_date + (60 * 60 * 24)
+        
+        preferred_vendor = vendors.min_by do |vendor|
+          vendor.sales.sum do |sale|
+            sale.purchase_time >= start_date && sale.purchase_time <= end_date ? sale.amount : 0
+          end
+        end
+      else
+        preferred_vendor = vendors.min_by do |vendor|
+          vendor.sales.sum do |sale|
+            sale.amount
+          end
+        end
+      end
+      return preferred_vendor
+    end
+    
     def self.all
       markets = CSV.readlines("support/markets.csv").map do |line|
         Market.new(line[0].to_i, line[1], line[2], line[3], line[4], line[5], line[6])
