@@ -90,6 +90,16 @@ describe "Market" do
     end
   end
   
+  describe "#preferred vendor" do
+    it "Returns the vendor with the highest revenue" do
+      market = FarMar::Market.find(2)
+      highest_vendor = market.preferred_vendor
+      
+      highest_vendor.must_be_kind_of FarMar::Vendor
+      highest_vendor.id.must_equal 8
+    end
+  end
+  
   describe "self.all" do
     it "Returns an array" do
       markets = FarMar::Market.all
