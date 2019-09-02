@@ -46,5 +46,23 @@ module FarMar
         market.id == id
       end
     end
+    
+    def self.search(search_term)
+      results = []
+      
+      all.each do |market|
+        if market.name.downcase.include?(search_term.downcase)
+          results << market
+        end
+      end
+      
+      Vendor.all.each do |vendor|
+        if vendor.name.downcase.include?(search_term.downcase)
+          results << vendor
+        end
+      end
+      
+      return results
+    end
   end  
 end

@@ -138,4 +138,11 @@ describe "Market" do
       market.id.must_equal 500
     end  
   end
+  
+  describe "self.search" do
+    it "Returns a collection of Market instances where the market or vendor name includes the search term" do
+      markets = FarMar::Market.search("white")
+      markets.length.must_equal 10
+    end
+  end
 end
