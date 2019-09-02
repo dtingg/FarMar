@@ -78,9 +78,19 @@ module FarMar
       return vendors
     end
     
-    # def self.revenue(date)
-    # end
-    
+    def self.revenue(date)
+      start_date = Time.parse(date)
+      end_date = start_date + (60 * 60 * 24)
+      total = 0
+      all.each do |vendor|
+        vendor.sales.each do |sale|
+          if sale.purchase_time >= start_date && sale.purchase_time <= end_date
+            total += sale.amount
+          end
+        end
+      end
+      return total
+    end
   end
 end
 

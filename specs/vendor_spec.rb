@@ -226,4 +226,12 @@ describe "Vendor" do
       top_five_vendors[4].id.must_equal 29  
     end
   end
+  
+  describe "self.revenue" do
+    it "Returns the total revenue for that date across all vendors" do
+      daily_revenue = FarMar::Vendor.revenue("November 9, 2013")
+      
+      daily_revenue.must_equal 174467      
+    end
+  end
 end
