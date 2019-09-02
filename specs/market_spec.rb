@@ -77,6 +77,19 @@ describe "Market" do
     end
   end
   
+  describe "#products" do
+    it "Returns a collection of Products that are associated with the market" do
+      market = FarMar::Market.find(2)
+      
+      products = market.products
+      products.length.must_equal 9
+      
+      products.each do |product|
+        product.must_be_kind_of FarMar::Product
+      end
+    end
+  end
+  
   describe "self.all" do
     it "Returns an array" do
       markets = FarMar::Market.all
