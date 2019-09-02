@@ -61,5 +61,12 @@ module FarMar
         sale.product_id == product_id
       end
     end
+    
+    def self.between(beginning_time, end_time)
+      sales = all.select do |sale|
+        sale.purchase_time >= beginning_time && sale.purchase_time <= end_time
+      end
+      return sales
+    end
   end
 end

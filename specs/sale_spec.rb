@@ -138,4 +138,19 @@ describe "Sale" do
       sale.id.must_equal 12001
     end  
   end
+  
+  describe "self.between" do
+    it "Returns a collection of Sale objects where the purchase time is between the times given" do
+      beginning_time = Time.parse("November 6, 2013 8:30 AM")
+      end_time = Time.parse("November 6, 2013, 8:45 AM")
+      
+      sales = FarMar::Sale.between(beginning_time, end_time)
+      
+      sales.length.must_equal 12
+      
+      sales.each do |sale|
+        sale.must_be_kind_of FarMar::Sale
+      end
+    end
+  end
 end
