@@ -34,7 +34,7 @@ module FarMar
       return Sale.find_by_vendor(id)
     end
     
-    def revenue
+    def revenue(date=nil)
       total = sales.sum do |sale|
         sale.amount
       end
@@ -43,7 +43,7 @@ module FarMar
     end
     
     def self.all
-      vendors = CSV.readlines("support/vendors.csv").map do |line|
+      vendors = CSV.readlines("test_data/vendors.csv").map do |line|
         Vendor.new(line[0].to_i, line[1], line[2].to_i, line[3].to_i)
       end
       
@@ -63,5 +63,24 @@ module FarMar
       
       return vendors
     end
+    
+    def self.most_revenue(number)
+      vendors = all.max_by(number) do |vendor|
+        vendor.revenue
+      end
+      return vendors
+    end
+    
+    def self.most_items(number)
+      vendors = all.max_by(number) do |vendor|
+        vendor.sales.length
+      end
+      return vendors
+    end
+    
+    # def self.revenue(date)
+    # end
+    
   end
 end
+

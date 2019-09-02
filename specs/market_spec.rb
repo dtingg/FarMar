@@ -142,7 +142,7 @@ describe "Market" do
     
     it "Returns the correct number of Markets" do
       markets = FarMar::Market.all
-      markets.length.must_equal 500
+      markets.length.must_equal 50
     end
     
     it "Gets the first Market from the file" do
@@ -152,7 +152,7 @@ describe "Market" do
     
     it "Gets the last Market from the file" do
       markets = FarMar::Market.all
-      markets.last.id.must_equal 500
+      markets.last.id.must_equal 50
     end
   end
   
@@ -169,16 +169,16 @@ describe "Market" do
     end
     
     it "Finds the last market" do 
-      market = FarMar::Market.find(500)
+      market = FarMar::Market.find(50)
       market.must_be_kind_of FarMar::Market
-      market.id.must_equal 500
+      market.id.must_equal 50
     end  
   end
   
   describe "self.search" do
     it "Returns a collection of Market instances where the market or vendor name includes the search term" do
-      markets = FarMar::Market.search("white")
-      markets.length.must_equal 10
+      markets = FarMar::Market.search("ring")
+      markets.length.must_equal 2
     end
   end
 end

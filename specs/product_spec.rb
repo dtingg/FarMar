@@ -99,7 +99,7 @@ describe "Product" do
     
     it "Returns the correct number of Products" do
       products = FarMar::Product.all
-      products.length.must_equal 8193
+      products.length.must_equal 164
     end
     
     it "Gets the first Product from the file" do
@@ -109,7 +109,7 @@ describe "Product" do
     
     it "Gets the last Product from the file" do
       products = FarMar::Product.all
-      products.last.id.must_equal 8193
+      products.last.id.must_equal 164
     end
   end
   
@@ -126,9 +126,9 @@ describe "Product" do
     end
     
     it "Finds the last product" do 
-      product = FarMar::Product.find(8193)
+      product = FarMar::Product.find(164)
       product.must_be_kind_of FarMar::Product
-      product.id.must_equal 8193
+      product.id.must_equal 164
     end  
   end
   

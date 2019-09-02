@@ -106,7 +106,7 @@ describe "Sale" do
     
     it "Returns the correct number of Sales" do
       sales = FarMar::Sale.all
-      sales.length.must_equal 12798
+      sales.length.must_equal 246
     end
     
     it "Gets the first Sale from the file" do
@@ -116,7 +116,7 @@ describe "Sale" do
     
     it "Gets the last Sale from the file" do
       sales = FarMar::Sale.all
-      sales.last.id.must_equal 12001
+      sales.last.id.must_equal 246
     end
   end
   
@@ -133,20 +133,20 @@ describe "Sale" do
     end
     
     it "Finds the last sale" do 
-      sale = FarMar::Sale.find(12001)
+      sale = FarMar::Sale.find(246)
       sale.must_be_kind_of FarMar::Sale
-      sale.id.must_equal 12001
+      sale.id.must_equal 246
     end  
   end
   
   describe "self.between" do
     it "Returns a collection of Sale objects where the purchase time is between the times given" do
       beginning_time = Time.parse("November 6, 2013 8:30 AM")
-      end_time = Time.parse("November 6, 2013, 8:45 AM")
+      end_time = Time.parse("November 6, 2013, 11:30 AM")
       
       sales = FarMar::Sale.between(beginning_time, end_time)
       
-      sales.length.must_equal 12
+      sales.length.must_equal 5
       
       sales.each do |sale|
         sale.must_be_kind_of FarMar::Sale

@@ -146,7 +146,7 @@ describe "Vendor" do
     
     it "Returns the correct number of Vendors" do
       vendors = FarMar::Vendor.all
-      vendors.length.must_equal 2690
+      vendors.length.must_equal 268
     end
     
     it "Gets the first Vendor from the file" do
@@ -156,7 +156,7 @@ describe "Vendor" do
     
     it "Gets the last Vendor from the file" do
       vendors = FarMar::Vendor.all
-      vendors.last.id.must_equal 2690
+      vendors.last.id.must_equal 268
     end
   end
   
@@ -173,9 +173,9 @@ describe "Vendor" do
     end
     
     it "Finds the last vendor" do 
-      vendor = FarMar::Vendor.find(2690)
+      vendor = FarMar::Vendor.find(268)
       vendor.must_be_kind_of FarMar::Vendor
-      vendor.id.must_equal 2690
+      vendor.id.must_equal 268
     end  
   end
   
@@ -188,6 +188,42 @@ describe "Vendor" do
       vendors.each do |vendor|
         vendor.must_be_kind_of FarMar::Vendor
       end
+    end
+  end
+  
+  describe "self.most_revenue" do
+    it "Returns the top n vendor instances ranked by total revenue" do
+      top_five_vendors = FarMar::Vendor.most_revenue(5)
+      
+      top_five_vendors.length.must_equal 5
+      
+      top_five_vendors.each do |vendor|
+        vendor.must_be_kind_of FarMar::Vendor
+      end
+      
+      top_five_vendors[0].id.must_equal 5
+      top_five_vendors[1].id.must_equal 40
+      top_five_vendors[2].id.must_equal 8
+      top_five_vendors[3].id.must_equal 44
+      top_five_vendors[4].id.must_equal 29
+    end
+  end
+  
+  describe "self.most_items" do
+    it "Returns the top n vendor instances ranked by total number of items sold" do
+      top_five_vendors = FarMar::Vendor.most_items(5)
+      
+      top_five_vendors.length.must_equal 5
+      
+      top_five_vendors.each do |vendor|
+        vendor.must_be_kind_of FarMar::Vendor
+      end
+      
+      top_five_vendors[0].id.must_equal 40
+      top_five_vendors[1].id.must_equal 8
+      top_five_vendors[2].id.must_equal 5
+      top_five_vendors[3].id.must_equal 10
+      top_five_vendors[4].id.must_equal 29  
     end
   end
 end
