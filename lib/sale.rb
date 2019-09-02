@@ -1,13 +1,9 @@
-require "csv"
-
 module FarMar
-  class Sale
-    attr_reader :id, :amount, :purchase_time, :vendor_id, :product_id
+  class Sale < Loadable
+    attr_reader :amount, :purchase_time, :vendor_id, :product_id
     
     def initialize(id, amount, purchase_time, vendor_id, product_id)
-      unless id.instance_of?(Integer) && id >= 0
-        raise ArgumentError.new("ID must be a positive integer (got #{id}).")
-      end
+      super(id)
       
       unless amount >= 0
         raise ArgumentError.new("Amount must be a positive number (got #{amount}).")
@@ -21,7 +17,6 @@ module FarMar
         raise ArgumentError.new("Product ID must be a positive integer (got #{product_id}).")
       end
       
-      @id = id
       @amount = amount
       @purchase_time = purchase_time
       @vendor_id = vendor_id
@@ -36,18 +31,12 @@ module FarMar
       return Product.find(product_id)
     end
     
-    def self.all
-      sales = CSV.readlines("test_data/sales.csv").map do |line|
-        Sale.new(line[0].to_i, line[1].to_i, Time.parse(line[2]), line[3].to_i, line[4].to_i)
-      end
-      
-      return sales
+    def self.from_csv_line(line)
+      self.new(line[0].to_i, line[1].to_i, Time.parse(line[2]), line[3].to_i, line[4].to_i)
     end
     
-    def self.find(id)
-      all.find do |sale|
-        sale.id == id
-      end
+    def self.csv_filename
+      return "test_data/sales.csv"
     end
     
     def self.find_by_vendor(vendor_id)

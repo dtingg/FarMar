@@ -2,7 +2,6 @@ require_relative "spec_helper"
 
 describe "Vendor" do
   describe "#initialize" do
-    
     it "Creates an instance of vendor" do
       vendor = FarMar::Vendor.new(1, "West Seattle Carrots", 10, 5)
       vendor.must_be_kind_of FarMar::Vendor

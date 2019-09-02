@@ -2,7 +2,6 @@ require_relative "spec_helper"
 
 describe "Sale" do
   describe "#initialize" do
-    
     it "Creates an instance of Sale" do
       sale = FarMar::Sale.new(1, 150, Time.parse("May 5, 2018"), 5, 10)
       sale.must_be_kind_of FarMar::Sale
