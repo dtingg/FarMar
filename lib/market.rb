@@ -33,10 +33,21 @@ module FarMar
       return products
     end
     
-    def preferred_vendor
-      preferred_vendor = vendors.max_by do |vendor|
-        vendor.sales.sum do |sale|
-          sale.amount
+    def preferred_vendor(date=nil)
+      if date
+        start_date = Time.parse(date)
+        end_date = start_date + (60 * 60 * 24)
+        
+        preferred_vendor = vendors.max_by do |vendor|
+          vendor.sales.sum do |sale|
+            sale.purchase_time >= start_date && sale.purchase_time <= end_date ? sale.amount : 0
+          end
+        end
+      else
+        preferred_vendor = vendors.max_by do |vendor|
+          vendor.sales.sum do |sale|
+            sale.amount
+          end
         end
       end
       return preferred_vendor
